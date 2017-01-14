@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -35,6 +36,24 @@ public class Checkpoint3_1 {
 		System.out.println("Answer: " + c.kthsmallest(a, 3));
 	}
 
+	/**
+	 * This replaces the code that failed due to lack of efficiency
+	 * - I'm guessing it wouldn't be acceptable as a solution,
+	 * due to the use of Collections.sort
+	 * 
+	 * @param a
+	 * @param k
+	 * @return
+	 */
+	public int kthsmallest(final List<Integer> a, int k) {
+	   List<Integer> kList = new ArrayList<Integer>(a);
+	   Collections.sort(kList);
+
+	    return (Integer) kList.toArray()[k - 1];
+	}
+	
+	// The below code failed due to lack of efficiency
+	/*
 	public int kthsmallest(final List<Integer> a, int k) {
 	    List<Integer> kList = new ArrayList<Integer>();
 	    
@@ -58,4 +77,5 @@ public class Checkpoint3_1 {
 	    
 	    return kList.get(k - 1);
 	}
+	*/
 }
