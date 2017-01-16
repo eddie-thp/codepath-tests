@@ -37,7 +37,6 @@ public class Checkpoint5_2 {
 		a.add(4);
 		a.add(5);
 		a.add(5);
-		// 4th attempt failed during this edge case
 		System.out.println("Result: " + c.longestConsecutive(a));
 	}
 
@@ -59,6 +58,13 @@ public class Checkpoint5_2 {
                 {
                     int first = existingSequence[0];
                     int last = existingSequence[1];
+                    
+                    if (n == first || n == last) {
+                        // Ignore number that has already been processed
+                        sequenceRange = existingSequence;
+                        inserted = true;
+                        break;
+                    }
 
                     // Is n before 1st ?
                     if (n + 1 == first) {
