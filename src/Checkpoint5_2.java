@@ -26,34 +26,64 @@ public class Checkpoint5_2 {
 		
 		Checkpoint5_2 c = new Checkpoint5_2();
 		System.out.println("Result: " + c.longestConsecutive(a));
+		
+		a.clear();
+		a.add(1);
+		a.add(1);
+		a.add(2);
+		a.add(2);
+		a.add(3);
+		a.add(3);
+		a.add(4);
+		a.add(4);
+		a.add(5);
+		a.add(5);
+		// 2nd attempt failed during this edge case
+		System.out.println("Result: " + c.longestConsecutive(a));
 	}
 
 	public int longestConsecutive(final List<Integer> a) {
-	    
-	    List<Integer> longestSequence = null;
-	    List<Integer> currentSequence = new ArrayList<Integer>();
-	    int lastN = 0;
+
+        int longest = 0;
+        List<List<Integer>> sequences = new ArrayList<List<Integer>>();
 	    for (int i = 0; i < a.size(); i++) {
-	        int currentN = a.get(i);
-	        // Check if the sequence has changed;
-	        if (i > 0 && lastN+1 != currentN)
-	        {
-	            // New Sequence
-	            if (longestSequence == null || longestSequence.size() < currentSequence.size())
-	            {
-	                longestSequence = currentSequence;
-	                currentSequence = new ArrayList<Integer>();
-	            }
-	        }
-	        
-            currentSequence.add(currentN);
-            lastN = currentN;
+            int n = a.get(i);	        
+            
+            List<Integer> sequence = new ArrayList<Integer>();
+            sequence.add(n);
+
+            boolean inserted = false;
+            if (sequences.size() > 0)
+            {
+                for (List<Integer> existingSequence : sequences)
+                {
+                    int first = existingSequence.get(0);
+                    int last = existingSequence.get(existingSequence.size() - 1);
+
+                    // Is n before 1st ?
+                    if (n + 1 == first) {
+                        existingSequence.addAll(0, sequence);
+                        sequence = existingSequence;
+                        inserted = true;
+                    } 
+                    // Is n after last ?
+                    else if (n - 1 == last) {
+                        existingSequence.addAll(existingSequence.size(), sequence);
+                        sequence = existingSequence;
+                        inserted = true;
+                    }
+                }
+            }
+            
+            if (!inserted) {
+                sequences.add(sequence);
+            }
+            
+            if (sequence.size() > longest) {
+                longest = sequence.size();
+            }
 	    }
 	    
-        if (currentSequence.size() > longestSequence.size())
-        {
-            longestSequence = currentSequence;
-        }
-	    return longestSequence.size();
+	    return longest;
 	}
 }
