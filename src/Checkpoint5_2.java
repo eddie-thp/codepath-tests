@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -45,30 +44,30 @@ public class Checkpoint5_2 {
 	public int longestConsecutive(final List<Integer> a) {
 
         int longest = 0;
-        List<List<Integer>> sequences = new ArrayList<List<Integer>>();
+        List<TreeSet<Integer>> sequences = new ArrayList<TreeSet<Integer>>();
 	    for (int i = 0; i < a.size(); i++) {
             int n = a.get(i);	        
             
-            List<Integer> sequence = new ArrayList<Integer>();
+            TreeSet<Integer> sequence = new TreeSet<Integer>();
             sequence.add(n);
 
             boolean inserted = false;
             if (sequences.size() > 0)
             {
-                for (List<Integer> existingSequence : sequences)
+                for (TreeSet<Integer> existingSequence : sequences)
                 {
-                    int first = existingSequence.get(0);
-                    int last = existingSequence.get(existingSequence.size() - 1);
+                    int first = existingSequence.first();
+                    int last = existingSequence.last();
 
                     // Is n before 1st ?
                     if (n + 1 == first) {
-                        existingSequence.addAll(0, sequence);
+                        existingSequence.addAll(sequence);
                         sequence = existingSequence;
                         inserted = true;
                     } 
                     // Is n after last ?
                     else if (n - 1 == last) {
-                        existingSequence.addAll(existingSequence.size(), sequence);
+                        existingSequence.addAll(sequence);
                         sequence = existingSequence;
                         inserted = true;
                     }
