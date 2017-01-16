@@ -37,49 +37,51 @@ public class Checkpoint5_2 {
 		a.add(4);
 		a.add(5);
 		a.add(5);
-		// 2nd attempt failed during this edge case
+		// 4th attempt failed during this edge case
 		System.out.println("Result: " + c.longestConsecutive(a));
 	}
 
 	public int longestConsecutive(final List<Integer> a) {
 
         int longest = 0;
-        List<TreeSet<Integer>> sequences = new ArrayList<TreeSet<Integer>>();
+        List<int[]> sequences = new ArrayList<int[]>();
 	    for (int i = 0; i < a.size(); i++) {
             int n = a.get(i);	        
             
-            TreeSet<Integer> sequence = new TreeSet<Integer>();
-            sequence.add(n);
+            int[] sequenceRange = new int[2];
+            sequenceRange[0] = n;
+            sequenceRange[1] = n;
 
             boolean inserted = false;
             if (sequences.size() > 0)
             {
-                for (TreeSet<Integer> existingSequence : sequences)
+                for (int[] existingSequence : sequences)
                 {
-                    int first = existingSequence.first();
-                    int last = existingSequence.last();
+                    int first = existingSequence[0];
+                    int last = existingSequence[1];
 
                     // Is n before 1st ?
                     if (n + 1 == first) {
-                        existingSequence.addAll(sequence);
-                        sequence = existingSequence;
+                        existingSequence[0] = sequenceRange[0];
+                        sequenceRange = existingSequence;
                         inserted = true;
                     } 
                     // Is n after last ?
                     else if (n - 1 == last) {
-                        existingSequence.addAll(sequence);
-                        sequence = existingSequence;
+                        existingSequence[1] = sequenceRange[1];
+                        sequenceRange = existingSequence;
                         inserted = true;
                     }
                 }
             }
             
             if (!inserted) {
-                sequences.add(sequence);
+                sequences.add(sequenceRange);
             }
             
-            if (sequence.size() > longest) {
-                longest = sequence.size();
+            int sRangeSize = (sequenceRange[1] - sequenceRange[0]) + 1;
+            if (sRangeSize > longest) {
+                longest = sRangeSize;
             }
 	    }
 	    
