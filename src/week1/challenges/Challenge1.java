@@ -27,22 +27,26 @@ public class Challenge1 {
 		a.add(2);
 
 		System.out.println("New Size: " + c.removeDuplicates(a));
+		System.out.println("A: " + a);
 	}
 
-	// Current implementation failed because of efficiency
+	// 1st Implementation was removing duplicates (not efficient)
+	// 2nd Implementation process the whole list and moves the "unique" items to the beginning of the list
+	// and returns the appropriate size (passed efficiency test)
 	public int removeDuplicates(ArrayList<Integer> a) {
-		Integer current = null;
+	    int total = 0;
+	    
+        Integer current = null;
 		Iterator<Integer> ai = a.iterator();
-		
-		while (ai.hasNext()) {
+		while(ai.hasNext()) {
 			Integer n = ai.next();
-			if (n.equals(current)) {
-				ai.remove();
-			} else {
+			if (!n.equals(current)) {
 				current = n;
+				a.set(total, current);
+				total++;
 			}
 		}
-
-		return a.size();
-	}
+		
+		return total;
+}
 }
