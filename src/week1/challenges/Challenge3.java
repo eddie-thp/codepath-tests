@@ -53,8 +53,8 @@ public class Challenge3 {
 		rows.add(row3);
 
 		// Test case 1
-		c.printMatrix(rows);
-		System.out.println("Spiral 1: " + c.spiralOrder(rows));
+		//c.printMatrix(rows);
+		//System.out.println("Spiral 1: " + c.spiralOrder(rows));
 		
 		//
 		rows = new ArrayList<ArrayList<Integer>>();
@@ -89,8 +89,8 @@ public class Challenge3 {
 		rows.add(row4);
 		
 		// Test case 2
-		c.printMatrix(rows);
-		System.out.println("Spiral: " + c.spiralOrder(rows));
+		//c.printMatrix(rows);
+		//System.out.println("Spiral: " + c.spiralOrder(rows));
 		
 		
 		// Test case 3
@@ -119,14 +119,17 @@ public class Challenge3 {
 	public ArrayList<Integer> spiralOrder(final List<ArrayList<Integer>> a) {
 		 ArrayList<Integer> result = new ArrayList<Integer>();
 		 
+		 int totalRows = a.size();
+		 int totalCols = a.get(0).size();
+		 
 		 int startRow = 0;
 		 int startCol = 0;
-		 int endRow = a.size() - 1;
-		 int endCol = a.get(0).size() - 1;
-		 while ((startCol <= endCol)
+		 int endRow = totalRows - 1;
+		 int endCol = totalCols - 1;
+		 while (startCol < totalRows && startCol < totalCols && ((startCol <= endCol)
 				 || (startRow + 1 <= endRow)
 				 || (endCol - 1 >= startCol)
-				 || (endRow - 1 >= startRow + 1)
+				 || (endRow - 1 >= startRow + 1))
 				 ) {
 			 
 			 if (startCol <= endCol) {
@@ -137,11 +140,11 @@ public class Challenge3 {
 				 readColTopBottom(endCol, startRow + 1, endRow, a, result);
 			 }
 
-			 if (endCol - 1 >= startCol) {
+			 if (endRow != startRow && endCol - 1 >= startCol) {
 				 readRowRightLeft(endRow, endCol - 1, startCol, a, result);
 			 }
 
-			 if (endRow - 1 >= startRow + 1) {
+			 if (startCol != endCol && endRow - 1 >= startRow + 1) {
 				 readColBottomTop(startCol, endRow - 1, startRow + 1, a, result);
 			 }
 			 
