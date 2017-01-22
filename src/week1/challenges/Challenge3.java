@@ -106,6 +106,26 @@ public class Challenge3 {
 		
 		c.printMatrix(rows);
 		System.out.println("Spiral: " + c.spiralOrder(rows));
+		
+		// Test case 4
+		rows = new ArrayList<ArrayList<Integer>>();
+		
+		row1 = new ArrayList<Integer>();
+		row1.add(1);
+		row1.add(2);
+		row1.add(3);
+		
+		row2 = new ArrayList<Integer>();
+		row2.add(4);
+		row2.add(5);
+		row2.add(6);
+
+		rows.add(row1);
+		rows.add(row2);
+
+		c.printMatrix(rows);
+		System.out.println("Spiral: " + c.spiralOrder(rows));
+
 	}
 
 	public void printMatrix(final List<ArrayList<Integer>> a) {
@@ -126,11 +146,10 @@ public class Challenge3 {
 		 int startCol = 0;
 		 int endRow = totalRows - 1;
 		 int endCol = totalCols - 1;
-		 while (startCol < totalRows && startCol < totalCols && ((startCol <= endCol)
-				 || (startRow + 1 <= endRow)
-				 || (endCol - 1 >= startCol)
-				 || (endRow - 1 >= startRow + 1))
-				 ) {
+		 while (startRow < totalRows 
+				 && startCol < totalCols 
+				 && startRow <= endRow 
+				 && startCol <= endCol) {
 			 
 			 if (startCol <= endCol) {
 				 readRowLeftRight(startRow, startCol, endCol, a, result);
@@ -140,11 +159,11 @@ public class Challenge3 {
 				 readColTopBottom(endCol, startRow + 1, endRow, a, result);
 			 }
 
-			 if (endRow != startRow && endCol - 1 >= startCol) {
+			 if ((endRow != startRow) && endCol - 1 >= startCol) {
 				 readRowRightLeft(endRow, endCol - 1, startCol, a, result);
 			 }
 
-			 if (startCol != endCol && endRow - 1 >= startRow + 1) {
+			 if ((startCol != endCol) && endRow - 1 >= startRow + 1) {
 				 readColBottomTop(startCol, endRow - 1, startRow + 1, a, result);
 			 }
 			 
