@@ -28,9 +28,11 @@ public class Challenge5 {
 	public static void main(String args[]) {
 		Challenge5 c = new Challenge5();
 		
-		String s = "aaaabaaa";
-				
-		System.out.println(c.longestPalindrome(s));
+		// Test case 1 - pass
+		System.out.println(c.longestPalindrome("aaaabaaa"));
+		
+		// Test case 2 - 
+		System.out.println(c.longestPalindrome("abbcccbbbcaaccbababcbcabca"));
 	}
 
 	public String longestPalindrome(String a) {
@@ -38,7 +40,7 @@ public class Challenge5 {
 		int currentSize = aSize;
 		while (currentSize > 0) {
 			for (int i = 0; (i + currentSize) <= aSize; i++) {
-				String b = a.substring(i);
+				String b = a.substring(i, i + currentSize);
 				
 				if (isPalindrome(b)) {
 					return b;
