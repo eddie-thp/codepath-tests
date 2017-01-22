@@ -53,8 +53,8 @@ public class Challenge3 {
 		rows.add(row3);
 
 		// Test case 1
-		//c.printMatrix(rows);
-		//System.out.println("Spiral 1: " + c.spiralOrder(rows));
+		c.printMatrix(rows);
+		System.out.println("Spiral 1: " + c.spiralOrder(rows));
 		
 		//
 		rows = new ArrayList<ArrayList<Integer>>();
@@ -89,8 +89,8 @@ public class Challenge3 {
 		rows.add(row4);
 		
 		// Test case 2
-		//c.printMatrix(rows);
-		//System.out.println("Spiral: " + c.spiralOrder(rows));
+		c.printMatrix(rows);
+		System.out.println("Spiral: " + c.spiralOrder(rows));
 		
 		
 		// Test case 3
@@ -129,7 +129,7 @@ public class Challenge3 {
 	}
 
 	public void printMatrix(final List<ArrayList<Integer>> a) {
-		System.out.println("Matrix:");
+		System.out.println("========= Matrix =======");
 		for (ArrayList<Integer> row : a) {
 			System.out.println(row);
 		}
