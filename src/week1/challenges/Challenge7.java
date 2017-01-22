@@ -22,6 +22,8 @@ package week1.challenges;
 public class Challenge7 {
 	public static void main(String args[]) {
 		Challenge7 c = new Challenge7();
+		
+		System.out.println(c.lengthOfLastWord("World   "));
 	}
 
 	public int lengthOfLastWord(final String a) {
