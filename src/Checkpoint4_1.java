@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import week2.linkedList.ListNode;
+
 /**
  * <pre>
  * Given a singly linked list, modify the value of first half nodes such that :
@@ -73,18 +75,5 @@ public class Checkpoint4_1 {
 		return a;
 	}
 
-}
-
-/**
- * Definition for singly-linked list.
- */
-class ListNode {
-	public int val;
-	public ListNode next;
-
-	ListNode(int x) {
-		val = x;
-		next = null;
-	}
 }
 
