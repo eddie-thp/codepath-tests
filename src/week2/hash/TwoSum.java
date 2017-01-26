@@ -1,6 +1,7 @@
 package week2.hash;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -64,29 +65,44 @@ public class TwoSum {
 		b.add(-8);
 		System.out.println("INDEXES: " + c.twoSum(b, -3));
 		
+		List d = new ArrayList<Integer>();
+		d.add(1);
+		d.add(1);
+		d.add(1);
+		System.out.println("INDEXES: " + c.twoSum(d, -3));
 	}
 
 	public ArrayList<Integer> twoSum(final List<Integer> a, int b) {
-		ArrayList<Integer> operands = new ArrayList<Integer>();
+	    ArrayList<Integer> operands = new ArrayList<Integer>();
 
-		for (int i = 0; i < a.size() - 1; i++) {
-			int n1 = a.get(i);
-			for (int j = i + 1; j < a.size(); j++) {
-				int n2 = a.get(j);
+        // Put array values into map
+	    HashMap<Integer, Integer> aMap = new HashMap<Integer, Integer>();
+        for (int i = 0; i < a.size(); i++) {
+            int n2 = a.get(i);
+            if (!aMap.containsKey(n2)) {
+                aMap.put(n2, i);        
+            }
+        }
 
-				if (n1 + n2 == b) {
-					if (operands.isEmpty()) {
-						operands.add(i + 1);
-						operands.add(j + 1);
-					} else if (operands.get(1) - 1 > j) {
-						operands.set(0, i + 1);
-						operands.set(1, j + 1);
-					}
-					break;
-				}
-			}
-		}
+	    for (int i = 0; i < a.size() ; i++) {
+	        int n1 = a.get(i);
+	        int n2 = b - n1;
 
-		return operands;
+            if (aMap.containsKey(n2)) {
+                int j = aMap.get(n2);
+                
+                if (j > i) {
+                    if (operands.isEmpty()) {
+                        operands.add(i + 1);
+                        operands.add(j + 1);
+	                } else if (operands.get(1) - 1 > j) {
+	                    operands.set(0, i + 1);
+	                    operands.set(1, j + 1);
+	                }
+	            }
+	        }
+	    }
+	    
+	    return operands;
 	}
 }
