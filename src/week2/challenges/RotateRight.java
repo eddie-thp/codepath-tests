@@ -44,57 +44,32 @@ public class RotateRight {
 	}
 
 	public ListNode rotateRight(ListNode a, int b) {
+	    ListNode start = a;
+	    
+	    ListNode current = a;
+	    int count = 1;
+	    while (current.next != null) {
+	        count++;
+	        current = current.next;
+	    }
+	    
+	    ListNode last = current;
+	    b = b % count; // In case counter is larger than the list
 
-		Storage storage = new Storage();
-		storage.first = a;
-
-		traverse(a, b, storage);
-
-		if (storage.newFirst != null) {
-			storage.last.next = storage.first;
-			storage.beforeNewFirst.next = null;
-			a = storage.newFirst;
-		}
-
-		return a;
+        if (b > 0) {
+            last.next = start;
+            
+            current = a;
+            int rotateAt = count - b;
+            for(int i = 1; i < rotateAt; i++) {
+                current = current.next;
+            }
+            
+            start = current.next;
+            current.next = null;
+            
+        }
+	    
+	    return start;
 	}
-
-	public int traverse(ListNode current, int b, Storage storage) {
-		storage.count++;
-
-		if (current.next != null) {
-
-			int pos = traverse(current.next, b, storage) + 1;
-
-			b = storage.b;
-
-			if (b > 0 && b < storage.count) {
-				if (b == pos) {
-					// New First
-					storage.newFirst = current;
-				} else if (b == (pos - 1)) {
-					// Before new first
-					storage.beforeNewFirst = current;
-				}
-			}
-
-			return pos;
-		} else {
-			storage.b = b % storage.count;
-			storage.last = current;
-			if (storage.b == 1) {
-				storage.newFirst = storage.last;
-			}
-			return 1;
-		}
-	}
-}
-
-class Storage {
-	ListNode first;
-	ListNode newFirst;
-	ListNode beforeNewFirst;
-	ListNode last;
-	int b;
-	int count;
 }
