@@ -15,7 +15,6 @@ public class Equal {
 		a.add(2);
 		a.add(9);
 		a.add(8);
-		
 		//System.out.println(new Equal().equal(a));
 		
 		ArrayList<Integer> b = new ArrayList<Integer>();
@@ -26,8 +25,16 @@ public class Equal {
 		b.add(1);
 		b.add(1);
 		b.add(1);
+		//System.out.println(new Equal().equal(b));
 		
-		System.out.println(new Equal().equal(b));
+		ArrayList<Integer> c = new ArrayList<Integer>();
+		c.add(0);
+		c.add(0);
+		c.add(1);
+		c.add(0);
+		c.add(2);
+		c.add(1);
+		System.out.println(new Equal().equal(c));
 	}
 
 	public ArrayList<Integer> equal(ArrayList<Integer> a) {
@@ -66,8 +73,27 @@ public class Equal {
 			if (possibleResult.size() >= 4) {
 				int a1 = possibleResult.get(0);
 				int b1 = possibleResult.get(1);
-				int c1 = possibleResult.get(2);
-				int d1 = possibleResult.get(3);
+				
+				int c1 = 0;
+				int d1 = 0;
+
+				boolean found = false;
+			    for (int i = 2; i < possibleResult.size(); i = i + 2)
+			    {
+                    c1 = possibleResult.get(i);
+                    d1 = possibleResult.get(i + 1);
+				
+				    if (a1 != c1 && a1 != d1 && b1 != c1 && b1 != d1) {
+				    	found = true;
+				        break;
+    				}
+				}
+				
+				if (!found) {
+				    // Something wrong with the data
+				    continue;
+				}
+				
 
 				if (result.size() == 0) {
 					result.add(a1);
@@ -96,7 +122,6 @@ public class Equal {
 				}
 			}
 		}
-
 		return result;
 	}
 }
