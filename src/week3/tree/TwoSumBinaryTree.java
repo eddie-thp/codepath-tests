@@ -43,47 +43,55 @@ import week3.tree.common.TreeNode;
 public class TwoSumBinaryTree {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		TreeNode a = new TreeNode(10);
+		TreeNode b = new TreeNode(9);
+		TreeNode c = new TreeNode(20);
+		a.left = b;
+		a.right = c;
+		
+		System.out.println((new TwoSumBinaryTree()).t2Sum(a, 40));
 	}
 	
     public int t2Sum(TreeNode A, int B) {
-        List<Integer> processedValues = new ArrayList<Integer>();
-        processedValues.add(A.val);
-        
-        int result = t2Sum(processedValues, A.right, B);
-        
-        if (result == 0) {
-            result = t2Sum(processedValues, A.left, B);
-        }
-        
+        return t2Sum(A, A, B);
+    }
+    
+    public int t2Sum(TreeNode root, TreeNode A, int B) {
+    	int result = 0;
+    	if (A != null) {
+	        int toSearch = B - A.val;
+	        
+	        if (toSearch != A.val) {
+	        	result = search(root, toSearch);
+	        }
+        	
+        	if (result == 0) {
+        		result = t2Sum(root, A.left, B);
+        	}
+
+        	if (result == 0) {
+        		result = t2Sum(root, A.right, B);
+        	}
+    	}        
         return result;
     }
     
-    public int t2Sum(List<Integer> processedValues, TreeNode A, int B) {
-        int result = 0;
-        
-        if (A != null) {
-            int val = A.val;
-            
-            for (int pVal : processedValues) {
-                if (B == pVal + val) {
-                    result = 1;
-                    break;
-                }
-            }
+    public int search(TreeNode node, int toSearch) {
+    	int found = 0;
 
-            processedValues.add(val);            
-
-            if (result == 0) {
-                result = t2Sum(processedValues, A.right, B);
-            }
-            
-            if (result == 0) {
-                result = t2Sum(processedValues, A.left, B);
-            }
-        }
-        return result;
+    	if (node != null) {
+	    	if (node.val == toSearch) {
+	    		found = 1;
+	    	} else if (toSearch < node.val) {
+	    		found = search(node.left, toSearch);
+	    	} else {
+	    		found = search(node.right, toSearch);
+	    	}
+    	}
+    	
+    	return found; 
     }
+
+    
 
 }
