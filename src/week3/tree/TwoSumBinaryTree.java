@@ -1,8 +1,5 @@
 package week3.tree;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import week3.tree.common.TreeNode;
 
 /**
