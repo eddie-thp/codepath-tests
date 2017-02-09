@@ -31,6 +31,21 @@ public class ReverseLinkedList {
 		}
 	}
 	
+	// Solving the same problem using recursion but with a single parameter
+	public ListNode reverseList(ListNode a) {
+		ListNode next = a.next;
+		a.next = null;
+		if (next == null) {
+			return a;
+		} else {
+			ListNode root = reverseList(next);
+			next.next = a;
+			return root;
+		}
+	}
+	
+	/*
+	// MY ORIGINAL IMPLEMENTATION
 	public ListNode reverseList(ListNode a) {
 	    return reverseNodes(null, a);
 	}
@@ -44,5 +59,5 @@ public class ReverseLinkedList {
 	        return current;
 	    }
 	}
-
+	*/
 }
